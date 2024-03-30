@@ -1,0 +1,35 @@
+<!-- templates/items.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Items</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+  <div class="container mx-auto px-4 py-8">
+
+    {% include 'menu.html' %}
+
+    <h2 class="text-xl font-semibold mb-4">Items</h2>
+    <ul>
+      {% for item in items %}
+      <li>{{ item.name }} - {{ item.description }}</li>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+      {% endfor %}
+    </ul>
+    
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">+ New</button>
+
+
+  </div>
+
+</body>
+
+</html>

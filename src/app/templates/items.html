@@ -14,19 +14,43 @@
 
   <div class="container mx-auto px-4 py-8">
 
-    {% include 'menu.html' %}
+    {% include 'nav.html' %}
 
     <h2 class="text-xl font-semibold mb-4">Items</h2>
-    <ul>
-      {% for item in items %}
-      <li>{{ item.name }} - {{ item.description }}</li>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
-      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
-      {% endfor %}
-    </ul>
-    
-    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">+ New</button>
 
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead>
+        <tr>
+          <th
+            class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+            Name
+          </th>
+          <th
+            class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+            Description
+          </th>
+          <th class="px-6 py-3 bg-gray-50"></th> <!-- Empty column for buttons -->
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {% for item in items %}
+        <tr>
+          <td class="px-6 py-4 whitespace-no-wrap">
+            {{ item.name }}
+          </td>
+          <td class="px-6 py-4 whitespace-no-wrap">
+            {{ item.description }}
+          </td>
+          <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Edit</button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">+ New</button>
 
   </div>
 

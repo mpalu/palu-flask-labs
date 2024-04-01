@@ -4,7 +4,8 @@ This module contains the main Flask application object.
 
 import logging
 from flask import Flask
-from .routes import register_routes
+from src.app.models.items import Items
+from src.app.routes import register_routes
 
 app = Flask(__name__)
 
@@ -27,4 +28,5 @@ if __name__ != "__main__":
     app.logger.setLevel(gunicorn_logger.level)
 
 if __name__ == "__main__":
+    Items.insert_initial_data()
     app.run(debug=True, use_reloader=True)

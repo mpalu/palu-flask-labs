@@ -63,10 +63,12 @@ class Items:
             c.execute("SELECT id FROM items WHERE id = ?", (item[0],))
             existing_item = c.fetchone()
             if existing_item:
-                print(f"Item {item[0]} already exists. Skipping insertion.")
+                logging.debug(
+                    "Item %s already exists. Skipping insertion.", item[0]
+                )  # pylint: disable=line-too-long
             else:
                 c.execute(
-                    "INSERT INTO items (id, name, description) VALUES (?, ?, ?)",
+                    "INSERT INTO items (id, name, description) VALUES (?, ?, ?)",  # pylint: disable=line-too-long
                     (item[0], item[1], item[2]),
                 )
         conn.commit()
@@ -75,15 +77,15 @@ class Items:
     @staticmethod
     def create_table_items():
         """
-        Creates a table named 'items' in the database if it doesn't already exist.
+        Creates a table 'items' in the database if it doesn't already exist.
 
         The table has the following columns:
         - id: INTEGER (Primary Key)
         - name: TEXT (Not Null)
         - description: TEXT
 
-        This function connects to the database, creates the table, and commits the
-        changes.
+        This function connects to the database, creates the table, and commits
+        the changes.
 
         Args:
             None
@@ -98,11 +100,13 @@ class Items:
 
             logging.debug("Checking if table 'items' exists...")
             c.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='items'"
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='items'"  # pylint: disable=line-too-long
             )
             table_exists = c.fetchone()
             if table_exists:
-                logging.debug("Table 'items' already exists. Skipping creation.")
+                logging.debug(
+                    "Table 'items' already exists. Skipping creation."
+                )  # pylint: disable=line-too-long
                 return
 
             logging.debug("Creating table 'items'...")

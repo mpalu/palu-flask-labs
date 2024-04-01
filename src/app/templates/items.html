@@ -1,14 +1,6 @@
 <!-- templates/items.html -->
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Items</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+{% include 'head.html' %}
 
 <body class="bg-gray-100">
 
@@ -50,7 +42,14 @@
       </tbody>
     </table>
 
-    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">+ New</button>
+    <form action="/items" method="post" class="mt-8">
+      <h3 class="text-xl font-semibold mb-4">Add new item</h3>
+      <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+      <input type="text" id="name" name="name" class="w-full px-3 py-2 border rounded-lg mb-4" required>
+      <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
+      <textarea id="description" name="description" class="w-full px-3 py-2 border rounded-lg mb-4" required></textarea>
+      <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add item</button>
+    </form>
 
   </div>
 

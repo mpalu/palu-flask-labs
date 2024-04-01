@@ -5,7 +5,7 @@ This module contains the main Flask application object.
 import logging
 from flask import Flask
 from src.app.models.items import Items
-from src.app.routes import register_routes
+from src.app.controllers.routes import register_routes
 
 app = Flask(__name__)
 

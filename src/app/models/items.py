@@ -4,6 +4,7 @@ This module contains the Items class.
 
 import logging
 import sqlite3
+from typing import Optional
 from src.app.models.database import DatabaseException, DATABASE_PATH
 
 
@@ -26,16 +27,13 @@ class Items:
         self.description = description
 
     @staticmethod
-    def all() -> list:
+    def get_all() -> list:
         """
         Retrieves all items from the database.
 
         Returns:
             list: A list of all items.
         """
-
-        Items.create_table_items()
-        Items.insert_initial_data()
 
         conn = sqlite3.connect(DATABASE_PATH)
         c = conn.cursor()
@@ -45,32 +43,39 @@ class Items:
         return [Items(*item) for item in items]
 
     @staticmethod
-    def insert_initial_data():
+    def get(item_id: int) -> Optional["Items"]:
         """
-        Inserts initial data into the database.
+        Retrieves an item from the database by its ID.
+
+        Args:
+            item_id (int): The ID of the item to retrieve.
 
         Returns:
-            None
+            Optional["Items"]: The item with the specified ID,
+            or None if the item does not exist.
         """
-        initial_data = [
-            (1, "Item 1", "Description for item 1"),
-            (2, "Item 2", "Description for item 2"),
-            (3, "Item 3", "Description for item 3"),
-        ]
         conn = sqlite3.connect(DATABASE_PATH)
         c = conn.cursor()
-        for item in initial_data:
-            c.execute("SELECT id FROM items WHERE id = ?", (item[0],))
-            existing_item = c.fetchone()
-            if existing_item:
-                logging.debug(
-                    "Item %s already exists. Skipping insertion.", item[0]
-                )  # pylint: disable=line-too-long
-            else:
-                c.execute(
-                    "INSERT INTO items (id, name, description) VALUES (?, ?, ?)",  # pylint: disable=line-too-long
-                    (item[0], item[1], item[2]),
-                )
+        c.execute(
+            "SELECT id, name, description FROM items WHERE id = ?", (item_id,)
+        )  # pylint: disable=line-too-long
+        item = c.fetchone()
+        conn.close()
+        if item:
+            return Items(*item)
+        else:
+            return None
+
+    def add(self):
+        """
+        Saves the item to the database.
+        """
+        conn = sqlite3.connect(DATABASE_PATH)
+        c = conn.cursor()
+        c.execute(
+            "INSERT INTO items (id, name, description) VALUES (?, ?, ?)",
+            (self.id, self.name, self.description),
+        )
         conn.commit()
         conn.close()
 
@@ -93,6 +98,8 @@ class Items:
         Returns:
             None
         """
+        conn = None
+
         try:
             logging.debug("Connecting to databse '%s'...", DATABASE_PATH)
             conn = sqlite3.connect(DATABASE_PATH)
@@ -128,3 +135,7 @@ class Items:
         finally:
             if conn:
                 conn.close()
+
+
+if __name__ == "__main__":
+    Items.create_table_items()

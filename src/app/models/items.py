@@ -3,10 +3,9 @@ This module contains the Items class.
 """
 
 import logging
-import sqlite3
 from typing import Optional
 
-from src.app.models.database import DATABASE_PATH, DatabaseException
+from src.app.models.database import DatabaseException, open_connection
 
 
 class Items:
@@ -36,7 +35,7 @@ class Items:
             list: A list of all items.
         """
 
-        conn = sqlite3.connect(DATABASE_PATH)
+        conn = open_connection()
         c = conn.cursor()
         c.execute("SELECT id, name, description FROM items")
         items = c.fetchall()
@@ -55,7 +54,7 @@ class Items:
             Optional["Items"]: The item with the specified ID,
             or None if the item does not exist.
         """
-        conn = sqlite3.connect(DATABASE_PATH)
+        conn = open_connection()
         c = conn.cursor()
         c.execute(
             "SELECT id, name, description FROM items WHERE id = ?", (item_id,)
@@ -71,7 +70,7 @@ class Items:
         """
         Saves the item to the database.
         """
-        conn = sqlite3.connect(DATABASE_PATH)
+        conn = open_connection()
         c = conn.cursor()
         c.execute(
             "INSERT INTO items (id, name, description) VALUES (?, ?, ?)",
@@ -102,8 +101,7 @@ class Items:
         conn = None
 
         try:
-            logging.debug("Connecting to databse '%s'...", DATABASE_PATH)
-            conn = sqlite3.connect(DATABASE_PATH)
+            conn = open_connection()
             c = conn.cursor()
 
             logging.debug("Checking if table 'items' exists...")

@@ -4,7 +4,8 @@ This module contains the items controller blueprint.
 It defines routes for rendering the items.html template.
 """
 
-from flask import Blueprint, request, render_template, redirect, url_for
+from flask import Blueprint, redirect, render_template, request, url_for
+
 from src.app.models.items import Items
 
 items_bp = Blueprint("items_bp", __name__)

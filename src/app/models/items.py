@@ -5,7 +5,8 @@ This module contains the Items class.
 import logging
 import sqlite3
 from typing import Optional
-from src.app.models.database import DatabaseException, DATABASE_PATH
+
+from src.app.models.database import DATABASE_PATH, DatabaseException
 
 
 class Items:

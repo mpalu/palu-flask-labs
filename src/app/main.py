@@ -4,10 +4,12 @@ This module contains the main Flask application object.
 
 import logging
 from flask import Flask
+from flask_wtf import CSRFProtect
 from src.app.models.items import Items
 from src.app.controllers.routes import register_routes
 
 app = Flask(__name__)
+csrf = CSRFProtect()
 
 register_routes(app)
 
@@ -29,4 +31,4 @@ if __name__ != "__main__":
 
 if __name__ == "__main__":
     Items.insert_initial_data()
-    app.run(debug=True, use_reloader=True)
+    csrf.init_app(app)

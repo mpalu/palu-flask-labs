@@ -3,10 +3,12 @@ This module contains the main Flask application object.
 """
 
 import logging
+
 from flask import Flask
 from flask_wtf import CSRFProtect
-from src.app.models.items import Items
+
 from src.app.controllers.routes import register_routes
+from src.app.models.items import Items
 
 app = Flask(__name__)
 csrf = CSRFProtect()

@@ -187,6 +187,25 @@ async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
 
 [[package]]
+name = "flask-wtf"
+version = "1.2.1"
+description = "Form rendering, validation, and CSRF protection for Flask with WTForms."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "flask_wtf-1.2.1-py3-none-any.whl", hash = "sha256:fa6793f2fb7e812e0fe9743b282118e581fb1b6c45d414b8af05e659bd653287"},
+    {file = "flask_wtf-1.2.1.tar.gz", hash = "sha256:8bb269eb9bb46b87e7c8233d7e7debdf1f8b74bf90cc1789988c29b37a97b695"},
+]
+
+[package.dependencies]
+flask = "*"
+itsdangerous = "*"
+wtforms = "*"
+
+[package.extras]
+email = ["email-validator"]
+
+[[package]]
 name = "gunicorn"
 version = "21.2.0"
 description = "WSGI HTTP Server for UNIX"
@@ -664,13 +683,13 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [[package]]
 name = "werkzeug"
-version = "3.0.1"
+version = "3.0.2"
 description = "The comprehensive WSGI web application library."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "werkzeug-3.0.1-py3-none-any.whl", hash = "sha256:90a285dc0e42ad56b34e696398b8122ee4c681833fb35b8334a095d82c56da10"},
-    {file = "werkzeug-3.0.1.tar.gz", hash = "sha256:507e811ecea72b18a404947aded4b3390e1db8f826b494d76550ef45bb3b1dcc"},
+    {file = "werkzeug-3.0.2-py3-none-any.whl", hash = "sha256:3aac3f5da756f93030740bc235d3e09449efcf65f2f55e3602e1d851b8f48795"},
+    {file = "werkzeug-3.0.2.tar.gz", hash = "sha256:e39b645a6ac92822588e7b39a692e7828724ceae0b0d702ef96701f90e70128d"},
 ]
 
 [package.dependencies]
@@ -678,6 +697,23 @@ MarkupSafe = ">=2.1.1"
 
 [package.extras]
 watchdog = ["watchdog (>=2.3)"]
+
+[[package]]
+name = "wtforms"
+version = "3.1.2"
+description = "Form validation and rendering for Python web development."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "wtforms-3.1.2-py3-none-any.whl", hash = "sha256:bf831c042829c8cdbad74c27575098d541d039b1faa74c771545ecac916f2c07"},
+    {file = "wtforms-3.1.2.tar.gz", hash = "sha256:f8d76180d7239c94c6322f7990ae1216dae3659b7aa1cee94b6318bdffb474b9"},
+]
+
+[package.dependencies]
+markupsafe = "*"
+
+[package.extras]
+email = ["email-validator"]
 
 [[package]]
 name = "zipp"
@@ -697,4 +733,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "e668e74f3132d711d6cfab84e9e44681f3ea62bde5fd76c97dde525b5bfea0bc"
+content-hash = "b31727b8421aa677d42351e0353d1c5ea225b4b1a4ef6ff8971c84dc1fdc8098"
